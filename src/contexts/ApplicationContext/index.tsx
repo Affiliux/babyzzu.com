@@ -140,7 +140,7 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
   }, [queryParams?.lang])
 
   useEffect(() => {
-    const saved_theme = localStorage.getItem(NEXT_THEME)
+    const saved_theme = get_storage(NEXT_THEME) as ThemeShowTypeEnum | null
 
     if (theme) {
       const root = document.documentElement
@@ -148,7 +148,7 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
         root.style.setProperty(key, value as string)
       })
     } else if (saved_theme) {
-      onChangeTheme(saved_theme as ThemeShowTypeEnum)
+      onChangeTheme(saved_theme)
     } else {
       onChangeTheme(ThemeShowTypeEnum.BLUE)
     }
