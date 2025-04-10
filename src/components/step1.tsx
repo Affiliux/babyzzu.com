@@ -13,7 +13,9 @@ import { useApplication } from '@/contexts/ApplicationContext'
 
 import { Input } from './ui/input'
 
+import { NEXT_THEME } from '@/constants'
 import { SexEnum, ThemeShowTypeEnum } from '@/enums'
+import { get_storage } from '@/infrastructure/cache/storage'
 
 interface Step1Props {
   isEdit?: boolean
@@ -38,10 +40,7 @@ export const Step1 = ({
 }: Step1Props) => {
   // hooks
   const t = useTranslations()
-  const { onChangeTheme } = useApplication()
-
-  const getNextTheme = localStorage.getItem('NEXT_THEME')
-  console.log(getNextTheme)
+  const { theme, onChangeTheme } = useApplication()
 
   const formSchema = z.object({
     child_name: z
@@ -117,23 +116,11 @@ export const Step1 = ({
   }, [child])
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem('NEXT_THEME') as ThemeShowTypeEnum | null
-
-    if (storedTheme) {
-      const themeExists = themes.some(theme => theme.data === storedTheme)
-
-      if (themeExists) {
-        setThemeShowType(storedTheme)
-      }
-    }
-  }, [])
-
-  useEffect(() => {
     if (isEdit) {
       setThemeShowType(child.themeShowType || ThemeShowTypeEnum.BLUE)
       onChangeTheme(child.themeShowType || ThemeShowTypeEnum.BLUE)
     } else {
-      const storedTheme = localStorage.getItem('NEXT_THEME') as ThemeShowTypeEnum | null
+      const storedTheme = get_storage(NEXT_THEME) as ThemeShowTypeEnum | null
       const themeExists = storedTheme && themes.some(theme => theme.data === storedTheme)
 
       if (themeExists) {
@@ -205,13 +192,13 @@ export const Step1 = ({
             <div
               key={theme.id}
               className={`flex items-center rounded-lg border p-4 cursor-pointer hover:bg-neutral-100/20 border-neutral-200/60 w-full`}
-              onClick={() => {
-                setThemeShowType(theme.data)
+              onClick={async () => {
                 if (isEdit) {
                   setChild(prev => ({ ...prev, themeShowType: theme.data }))
                 }
-                onChangeTheme(theme.data)
-                localStorage.setItem('NEXT_THEME', theme.data)
+
+                setThemeShowType(theme.data)
+                await onChangeTheme(theme.data)
               }}
             >
               {theme.data === themeShowType ? (
