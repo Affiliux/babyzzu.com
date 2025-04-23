@@ -47,7 +47,6 @@ export default function Page() {
     onUpdatePage,
   } = useAccount()
   const { onUploadTimelineFile, onDeleteTimelineFile } = useTimeline()
-  console.log(child)
 
   // steps
   const [step, set_step] = useState(1)
