@@ -126,7 +126,7 @@ export default function Page() {
         sex: selected.sex,
         dateShowType: selected.dateShowType,
         themeShowType: selected.themeShowType,
-        timeLine: [],
+        timeLine: selected.timeLine,
       }
 
       const mediaChildProps: MediaPreProps[] = selected.media.map(media => ({
