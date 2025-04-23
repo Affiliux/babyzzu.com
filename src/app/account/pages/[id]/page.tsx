@@ -47,6 +47,7 @@ export default function Page() {
     onUpdatePage,
   } = useAccount()
   const { onUploadTimelineFile, onDeleteTimelineFile } = useTimeline()
+  console.log(child)
 
   // steps
   const [step, set_step] = useState(1)
@@ -126,7 +127,7 @@ export default function Page() {
         sex: selected.sex,
         dateShowType: selected.dateShowType,
         themeShowType: selected.themeShowType,
-        timeLine: [],
+        timeLine: selected.timeLine,
       }
 
       const mediaChildProps: MediaPreProps[] = selected.media.map(media => ({
