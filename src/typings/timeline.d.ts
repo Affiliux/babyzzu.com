@@ -14,6 +14,7 @@ export interface TimelineEntryProps extends BaseEntityProps {
   title: string
   description: string
   media: MediaProps[]
+  isNew: boolean
 }
 
 export interface PreWebsiteProps extends BaseEntityProps {
