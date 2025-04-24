@@ -120,7 +120,7 @@ export const Step4 = ({
         media: [],
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        isNew: true
+        isNew: true,
       }
 
       const createMethod = getCreateMethod()
@@ -309,10 +309,10 @@ export const Step4 = ({
               className='border border-b-neutral-200/60 border-neutral-200/60 w-full shadow-lg shadow-neutral-200/30 rounded-lg mb-2'
             >
               <AccordionTrigger className='p-4' noUnderline>
-                <div className="flex items-center gap-2">
+                <div className='flex items-center gap-2'>
                   {entry.title.length ? entry.title : `${index + 1}° ${t('steps.step4.accordion.title')}`}
                   {entry.isNew && (
-                    <span className="px-2 py-1 text-xs font-semibold bg-theme-100 text-theme-600 rounded-full">
+                    <span className='px-2 py-1 text-xs font-semibold bg-theme-100 text-theme-600 rounded-full'>
                       Nova
                     </span>
                   )}
