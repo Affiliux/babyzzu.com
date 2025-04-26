@@ -50,14 +50,14 @@ export function RequestForm({ set_email }: { set_email: (email: string | null) =
     } catch (error: any) {
       if (error.message === 'User not found') {
         toast({
-          title: t('toast.error.title'),
-          description: t('toast.error.user-not-found'),
+          title: t('form.toast.title.error'),
+          description: t('form.toast.codes.404'),
           variant: 'destructive',
         })
       } else {
         toast({
-          title: t('toast.error.title'),
-          description: t('toast.error.default'),
+          title: t('form.toast.title.error'),
+          description: t('form.toast.codes.500'),
           variant: 'destructive',
         })
       }
