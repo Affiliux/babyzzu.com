@@ -141,16 +141,15 @@ export default function ApplicationProvider({ children }: ApplicationProviderPro
 
   useEffect(() => {
     const saved_theme = get_storage(NEXT_THEME) as ThemeShowTypeEnum | null
+    const current_theme = theme || saved_theme || ThemeShowTypeEnum.BLUE
 
-    if (theme) {
+    if (current_theme && THEMES[current_theme]) {
       const root = document.documentElement
-      Object.entries(THEMES[theme]).forEach(([key, value]) => {
+      Object.entries(THEMES[current_theme]).forEach(([key, value]) => {
         root.style.setProperty(key, value as string)
       })
-    } else if (saved_theme) {
-      onChangeTheme(saved_theme)
     } else {
-      onChangeTheme(ThemeShowTypeEnum.BLUE)
+      set_theme(ThemeShowTypeEnum.BLUE)
     }
   }, [theme])
 
